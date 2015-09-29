@@ -1,15 +1,15 @@
 # Ticketing Application #
 
-###---------------------------###
-	General Description
-###---------------------------###
+---------------------------
+    General Description
+---------------------------
 
 It is ticketing application created to view, monitor,edit and add tickets in the environment.
 It is just a POC created for the RedMart home task.
 
-###---------------------------###
-	Technologies used
-###---------------------------###
+---------------------------
+    Technologies used
+---------------------------
 
 * Server side
 	* Spring MVC for Rest based web services
