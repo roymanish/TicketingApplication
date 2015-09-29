@@ -1,0 +1,59 @@
+<div ng-include src="'resources/modules/home/leftBar.html'"></div>
+
+<div class="col-xs-12" data-ng-init="init()">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+
+			<div class="input-group">
+				<span class="input-group-btn">
+					<button class="btn btn-success" type="button"
+						ng-click="ticketSelectionShow('Open')">All Open Tickets</button>
+					<button class="btn btn-danger" type="button"
+						ng-click="ticketSelectionShow('Closed')">All Closed
+						Tickets</button>
+				</span> <input ng-model="query" type="text" class="form-control"
+					placeholder="Search Tickets"> <span class="input-group-btn">
+					<button class="btn btn-success" type="button"
+						ng-click="goToCreateTicket()">Create Ticket</button>
+				</span>
+			</div>
+
+		</div>
+
+		<div class="panel-body">
+
+			<div class="table-responsive">
+				<table class="table table-striped table-hover">
+					<thead>
+						<th>Type</th>
+						<th ng-click="predicate = 'status'">Status</th>
+						<th ng-click="predicate = 'assignedTo'">Assigned To</th>
+						<th ng-click="predicate = 'ticketSub'">Subject</th>
+						<th ng-click="predicate = 'email'">E-Mail</th>
+						<th ng-click="predicate = 'createdBy'">Created By</th>
+					</thead>
+					<tbody>
+						<tr class="enableHover"
+							ng-repeat="(id, object) in tickets | orderBy:predicate:true | filter:query"
+							ng-click="editTicket(object)">
+							<td><span class="glyphicon glyphicon-tag"></span></td>
+							<td><button class="label"
+									ng-disabled="object.status == 'Closed'"
+									ng-class="object.status == 'Open' ? 'btn label-success' : 'btn label-danger'"
+									ng-click="toggleStatus(object)">{{object.status}}</button></td>
+							<td>{{ object.assignedTo }}</td>
+							<td>{{ object.ticketSub }}</td>
+							<td>{{ object.email }}</td>
+							<td>{{object.createdBy}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-body">
+				<button type="submit" class="btn btn-danger" ng-click="logout()">Logout</button>
+				<img ng-if="dataLoading"
+					src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+			</div>
+		</div>
+	</div>
+</div>
